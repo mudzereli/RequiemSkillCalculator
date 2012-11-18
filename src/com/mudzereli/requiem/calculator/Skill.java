@@ -1,0 +1,141 @@
+package com.mudzereli.requiem.calculator;
+
+
+import java.io.IOException;
+
+import javax.imageio.ImageIO;
+import javax.swing.ImageIcon;
+
+public enum Skill {
+	//TEMPLAR
+	ELEC_BOLT (1, JobLower.TEMPLAR, "2",0,0),
+	REJUVENATION (1, JobLower.TEMPLAR, "3",2,0),
+	ION_SHIELD (1, JobLower.TEMPLAR, "4",4,0),
+	ELEC_TWISTER (10, JobLower.TEMPLAR, "14",1,1),
+	CONCENTRATION (10, JobLower.TEMPLAR, "5",3,1),
+	CHARGED_BOLT (20, JobLower.TEMPLAR, "9",0,2),
+	LESSER_HEAL (20, JobLower.TEMPLAR, "6",2,2),
+	DIVINE_PROTECTION_TEMPLAR (20, JobLower.TEMPLAR, "15",4,2),
+	ELEC_SHOCK (30, JobLower.TEMPLAR, "24",1,3),
+	HOLY_BOLT (40, JobLower.TEMPLAR, "17",0,4),
+	INVIGORATION (40, JobLower.TEMPLAR, "23",2,4),
+	BLESSED_REVELATION (40, JobLower.TEMPLAR, "26",3,4),
+	MAGIC_SHIELD_MASTERY (40, JobLower.TEMPLAR, "22",4,4),
+	SLEEP (40, JobLower.TEMPLAR, "10",5,4),
+	RESISTANCE_CURSES (40, JobLower.TEMPLAR, "21",2,5),
+	//TEMPEST
+	LIGHTNING_RESTRAINT (50, JobUpper.TEMPEST, "197",0,0), //WRONG ICON
+	GLARING_LIGHT (50, JobUpper.TEMPEST, "28",1,0),
+	WEAPON_OF_GOD (50, JobUpper.TEMPEST, "31",2,0),
+	BLESSING_OF_HASTE (50, JobUpper.TEMPEST, "30",3,0),
+	SOUL_DEPURATION (50, JobUpper.TEMPEST, "16",4,0),
+	MAGIC_WEAPON_MASTERY (50, JobUpper.TEMPEST, "20",5,0),
+	HOLY_LIGHT (60, JobUpper.TEMPEST, "198",1,1),
+	INSTANT_MOVING (60, JobUpper.TEMPEST, "17",3,1), //WRONG ICON
+	GODLY_MIRROR (60, JobUpper.TEMPEST, "11",4,1),
+	MAGIC_MASTERY_ELEC (60, JobUpper.TEMPEST, "199",5,1),
+	SEAL_OF_ACCELERATION (80, JobUpper.TEMPEST, "203",3,3), // WRONG ICON
+	//RADIANT
+	SALVATION(50, JobUpper.RADIANT,"8", 0,0),
+	LESSER_PARTY_HEAL_RADIANT(50, JobUpper.RADIANT,"18", 1,0),
+	MODERATE_HEAL(50, JobUpper.RADIANT,"29", 2,0),
+	DIVINE_PROTECTION_RADIANT(50, JobUpper.RADIANT,"201", 4,0),
+	SURVIVAL_INSTINCT_RADIANT(50, JobUpper.RADIANT,"12", 5,0),
+	RESTORATION_RADIANT(60, JobUpper.RADIANT,"25", 0,1),
+	MODERATE_PARTY_HEAL(60, JobUpper.RADIANT,"204", 1,1),
+	HUSH(60, JobUpper.RADIANT,"202", 3,1),
+	MANA_SHIELD(60, JobUpper.RADIANT,"203", 4,1),
+	DIVINE_CLEANSING(80,JobUpper.RADIANT,"1",1,3),
+	//DEFENDER
+	CHAIN_SLASH_DEFENDER(1,JobLower.DEFENDER,"1",0,0),
+	FIGHTING_WILL(1,JobLower.DEFENDER,"2",2,0),
+	VITAL_STAB(10,JobLower.DEFENDER,"3",1,1),
+	PHYSICAL_BLESSING(10,JobLower.DEFENDER,"4",4,1),
+	DIRE_STRIKE_SLASH(20,JobLower.DEFENDER,"5",0,2),
+	TAUNT(20,JobLower.DEFENDER,"6",3,2),
+	QUICK_ATTACK(30,JobLower.DEFENDER,"7",2,3),
+	SURVIVAL_INSTINCT_DEFENDER(30,JobLower.DEFENDER,"8",4,3),
+	ONSLAUGHT(40,JobLower.DEFENDER,"9",0,4),
+	SHIELD_STRIKE(40,JobLower.DEFENDER,"10",1,4),
+	TAUNTING_CRY(40,JobLower.DEFENDER,"11",3,4),
+	SKIN_OF_STONE(40,JobLower.DEFENDER,"12",4,4),
+	//COMMANDER
+	CHAIN_SLASH_COMMANDER(50,JobUpper.COMMANDER,"13",0,0),
+	BEAM_SLASH(50,JobUpper.COMMANDER,"14",1,0),
+	RUSH(50,JobUpper.COMMANDER,"15",2,0),
+	PROMISE_OF_VICTORY(50,JobUpper.COMMANDER,"16",3,0),
+	ONE_HANDED_WEAPON_MASTERY(50,JobUpper.COMMANDER,"17",4,0),
+	CHAIN_OF_RESTRAINT(50,JobUpper.COMMANDER,"18",4,0),
+	BOOMERANG_OF_SWORD_AURA(60,JobUpper.COMMANDER,"19",0,1),
+	MOONLIGHT_SLASH(60,JobUpper.COMMANDER,"20",1,1),
+	FACE_STRIKE(50,JobUpper.COMMANDER,"21",2,1),
+	ADAMANT_MIND(50,JobUpper.COMMANDER,"22",3,1),
+	UPLIFTING_CRY(80,JobUpper.COMMANDER,"23",2,3), //WRONG ICON
+	//PROTECTOR
+	LOW_BLOW(50,JobUpper.PROTECTOR,"24",0,0),
+	RESTORATION_PROTECTOR(50,JobUpper.PROTECTOR,"25",1,0),
+	RESTRAINT_RESCISSION(50,JobUpper.PROTECTOR,"26",3,0),
+	SHIELD_MASTERY(50,JobUpper.PROTECTOR,"27",4,0),
+	SACRED_HAND(60,JobUpper.PROTECTOR,"28",1,1),
+	SPIRITUAL_INTENSIFICATION(60,JobUpper.PROTECTOR,"29",2,1),
+	AEGIS_OF_PROTECTION(60,JobUpper.PROTECTOR,"30",4,1),
+	LESSER_PARTY_HEAL_PROTECTOR(70,JobUpper.PROTECTOR,"31",1,2),
+	SHIELD_FORTRESS(70,JobUpper.PROTECTOR,"32",4,2), //WRONG ICON
+	BROKEN_MORALE(80,JobUpper.PROTECTOR,"33",5,3)
+	;
+	
+	public final int LEVEL_REQ;
+	public final Job JOB_REQ;
+	public ImageIcon IMAGE_ICON;
+	public JPanelSkill JPANEL;
+	
+	private Skill (int levelReq, Job jobReq, String iconFileName, int iconXCoordinate, int iconYCoordinate) {
+		LEVEL_REQ = levelReq;
+		JOB_REQ = jobReq;
+		try {
+			String iconFolder;
+			if (JOB_REQ instanceof JobUpper) {
+				iconFolder = ((JobUpper) JOB_REQ).jobLower.toString().toLowerCase();
+			} else {
+				iconFolder = JOB_REQ.toString().toLowerCase();
+			}
+			IMAGE_ICON = new ImageIcon(ImageIO.read(getClass().getClassLoader().getResourceAsStream("com/mudzereli/requiem/resources/icons/" + iconFolder + "/" + iconFileName + ".gif")));
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		JPANEL = new JPanelSkill(this, iconXCoordinate, iconYCoordinate);
+	}
+	
+	public Skill getSkillReq() {
+		switch (this) {
+			//TEMPLAR
+			case CHARGED_BOLT: return ELEC_BOLT;
+			case LESSER_HEAL:  return REJUVENATION;
+			case DIVINE_PROTECTION_TEMPLAR:  return ION_SHIELD;
+			case ELEC_SHOCK: return ELEC_TWISTER;
+			case HOLY_BOLT: return CHARGED_BOLT;
+			case INVIGORATION: return LESSER_HEAL;
+			case BLESSED_REVELATION: return CONCENTRATION;
+			case HOLY_LIGHT: return GLARING_LIGHT;
+			case INSTANT_MOVING: return BLESSING_OF_HASTE;
+			case GODLY_MIRROR: return SOUL_DEPURATION;
+			case MAGIC_MASTERY_ELEC: return MAGIC_WEAPON_MASTERY;
+			case RESTORATION_RADIANT: return SALVATION;
+			case MODERATE_PARTY_HEAL: return LESSER_PARTY_HEAL_RADIANT;
+			case MANA_SHIELD: return DIVINE_PROTECTION_RADIANT;
+			case VITAL_STAB: return CHAIN_SLASH_DEFENDER;
+			case DIRE_STRIKE_SLASH: return CHAIN_SLASH_DEFENDER;
+			case QUICK_ATTACK: return FIGHTING_WILL;
+			case SURVIVAL_INSTINCT_DEFENDER: return PHYSICAL_BLESSING;
+			case ONSLAUGHT: return DIRE_STRIKE_SLASH;
+			case TAUNTING_CRY: return TAUNT;
+			case SKIN_OF_STONE: return SURVIVAL_INSTINCT_DEFENDER;
+			case BOOMERANG_OF_SWORD_AURA: return CHAIN_SLASH_COMMANDER;
+			case MOONLIGHT_SLASH: return BEAM_SLASH;
+			case ADAMANT_MIND: return FACE_STRIKE;
+			case SACRED_HAND: return RESTORATION_PROTECTOR;
+			case AEGIS_OF_PROTECTION: return SHIELD_MASTERY;
+			default: return null;
+		}
+	}
+}
