@@ -2,9 +2,9 @@ package com.mudzereli.requiem.calculator;
 
 
 import java.awt.Color;
+import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.GridBagLayout;
-import java.awt.Point;
 
 import javax.swing.BorderFactory;
 import javax.swing.DefaultComboBoxModel;
@@ -50,6 +50,7 @@ public class Calculator extends JApplet {
 		JPanel panelConfig = new JPanel();
 		panelConfig.setOpaque(false);
 		panelConfig.setBorder(BorderFactory.createCompoundBorder(BorderFactory.createBevelBorder(BevelBorder.RAISED,Color.GRAY, Color.DARK_GRAY),BorderFactory.createBevelBorder(BevelBorder.LOWERED,Color.GRAY, Color.DARK_GRAY)));
+		panelConfig.setPreferredSize(new Dimension(150, 150));
 		panelMain.add(panelConfig, new GBC(0,0).setInsets(5).setFill(GBC.BOTH));
 		GridBagLayout gbl_panelConfig = new GridBagLayout();
 		gbl_panelConfig.columnWidths = new int[] {150, 150};
@@ -58,22 +59,21 @@ public class Calculator extends JApplet {
 		gbl_panelConfig.rowWeights = new double[]{1.0, 1.0, 1.0, 1.0, 1.0, 1.0};
 		panelConfig.setLayout(gbl_panelConfig);
 		
-		JLabel lblRequiemTalentCalculator = new JLabel("REQUIEM SKILL CALCULATOR");
+		JLabel lblRequiemTalentCalculator = new JLabel("REQUIEM SKILL CALC");
 		lblRequiemTalentCalculator.setForeground(Color.WHITE);
 		lblRequiemTalentCalculator.setFont(new Font(Font.SANS_SERIF, Font.BOLD, 24));
 		lblRequiemTalentCalculator.setHorizontalAlignment(SwingConstants.LEFT);
 		panelConfig.add(lblRequiemTalentCalculator, new GBC(0,0).setInsets(1).setFill(GBC.VERTICAL).setGridWidth(2));
 		
-		JLabel lblJobUpper = new JLabel("SELECT CHARACTER CLASS FROM DROP DOWN");
+		JLabel lblJobUpper = new JLabel("JOB");
 		lblJobUpper.setForeground(Color.WHITE);
-		lblJobUpper.setFont(new Font(Font.SANS_SERIF, Font.BOLD, 16));
+		lblJobUpper.setFont(new Font(Font.SANS_SERIF, Font.BOLD, 20));
 		lblJobUpper.setHorizontalAlignment(SwingConstants.LEFT);
-		panelConfig.add(lblJobUpper, new GBC(0,1).setInsets(1).setFill(GBC.VERTICAL).setGridWidth(2));
+		panelConfig.add(lblJobUpper, new GBC(0,1).setInsets(1).setFill(GBC.BOTH));
 		
 		cmbJobUpper = new JComboBox<JobUpper>();
-		panelConfig.add(cmbJobUpper, new GBC(0,2).setInsets(1).setFill(GBC.BOTH).setGridWidth(2));
+		panelConfig.add(cmbJobUpper, new GBC(1,1).setInsets(1).setFill(GBC.BOTH));
 		cmbJobUpper.setModel(new DefaultComboBoxModel<JobUpper>(JobUpper.values()));
-		cmbJobUpper.setSelectedItem(JobUpper.TEMPEST);
 		cmbJobUpper.addPopupMenuListener(new PopupMenuListener() {
 			public void popupMenuCanceled(PopupMenuEvent arg0) {
 			}
@@ -86,13 +86,13 @@ public class Calculator extends JApplet {
 		
 		JLabel lblLevel = new JLabel("LEVEL");
 		lblLevel.setForeground(Color.WHITE);
-		lblLevel.setFont(new Font(Font.SANS_SERIF, Font.BOLD, 24));
+		lblLevel.setFont(new Font(Font.SANS_SERIF, Font.BOLD, 20));
 		lblLevel.setHorizontalAlignment(SwingConstants.LEFT);
-		panelConfig.add(lblLevel, new GBC(0,3).setInsets(1).setFill(GBC.BOTH));
+		panelConfig.add(lblLevel, new GBC(0,2).setInsets(1).setFill(GBC.BOTH));
 		
 		txtLevel = new JTextField();
 		txtLevel.setFont(new Font(Font.SANS_SERIF, Font.BOLD, 24));
-		panelConfig.add(txtLevel, new GBC(1,3).setInsets(1).setFill(GBC.BOTH));
+		panelConfig.add(txtLevel, new GBC(1,2).setInsets(1).setFill(GBC.BOTH));
 		txtLevel.setHorizontalAlignment(SwingConstants.RIGHT);
 		txtLevel.setText("1");
 		txtLevel.setColumns(2);
@@ -132,14 +132,14 @@ public class Calculator extends JApplet {
 		
 		JLabel lblSkillPoints = new JLabel("SKILL POINTS");
 		lblSkillPoints.setForeground(Color.WHITE);
-		lblSkillPoints.setFont(new Font(Font.SANS_SERIF, Font.BOLD, 24));
+		lblSkillPoints.setFont(new Font(Font.SANS_SERIF, Font.BOLD, 20));
 		lblSkillPoints.setHorizontalAlignment(SwingConstants.LEFT);
-		panelConfig.add(lblSkillPoints, new GBC(0,5).setInsets(1).setFill(GBC.BOTH));
+		panelConfig.add(lblSkillPoints, new GBC(0,3).setInsets(1).setFill(GBC.BOTH));
 		
 		lblSkillPointsField = new JLabel("0");
 		lblSkillPointsField.setForeground(Color.WHITE);
 		lblSkillPointsField.setFont(new Font(Font.SANS_SERIF, Font.BOLD, 24));
-		panelConfig.add(lblSkillPointsField, new GBC(1,5).setInsets(1).setFill(GBC.BOTH));
+		panelConfig.add(lblSkillPointsField, new GBC(1,3).setInsets(1).setFill(GBC.BOTH));
 		lblSkillPointsField.setHorizontalAlignment(SwingConstants.RIGHT);
 		
 		JPanel panelSkills = new JPanelBackground("com/mudzereli/requiem/resources/art/skillpanelbackground.jpg",JPanelBackground.SCALED);
@@ -148,28 +148,48 @@ public class Calculator extends JApplet {
 		panelMain.add(panelSkills, new GBC(1,0).setInsets(5).setFill(GBC.BOTH).setGridHeight(2));
 		GridBagLayout gbl_panelSkills = new GridBagLayout();
 		gbl_panelSkills.columnWidths = new int[]{500};
-		gbl_panelSkills.rowHeights = new int[]{450, 5, 300};
+		gbl_panelSkills.rowHeights = new int[]{35, 450, 35, 300};
 		gbl_panelSkills.columnWeights = new double[]{1.0};
-		gbl_panelSkills.rowWeights = new double[]{1.0};
+		gbl_panelSkills.rowWeights = new double[]{1.0, 1.0, 1.0, 1.0};
 		panelSkills.setLayout(gbl_panelSkills);
+		
+		JLabel dividerLowerJob = new JLabel();
+		dividerLowerJob.setOpaque(true);
+		dividerLowerJob.setBackground(Color.DARK_GRAY);
+		dividerLowerJob.setForeground(Color.WHITE);
+		dividerLowerJob.setHorizontalAlignment(SwingConstants.CENTER);
+		dividerLowerJob.setFont(new Font(Font.SANS_SERIF, Font.BOLD, 24));
+		dividerLowerJob.setText("Lower Job");
+		dividerLowerJob.setMinimumSize(new Dimension(450,100));
+		dividerLowerJob.setBorder(BorderFactory.createCompoundBorder(BorderFactory.createBevelBorder(BevelBorder.RAISED,Color.GRAY, Color.DARK_GRAY),BorderFactory.createBevelBorder(BevelBorder.LOWERED,Color.GRAY, Color.DARK_GRAY)));
+		panelSkills.add(dividerLowerJob, new GBC(0,0).setInsets(5).setFill(GBC.BOTH));
 		
 		panelJobLower = new JPanel();
 		panelJobLower.setOpaque(false);
-		panelSkills.add(panelJobLower, new GBC(0,0).setInsets(5).setFill(GBC.BOTH));
+		panelJobLower.setPreferredSize(new Dimension(74*6, 74*6));
+		panelSkills.add(panelJobLower, new GBC(0,1).setInsets(5).setFill(GBC.BOTH));
 		GridBagLayout gbl_panelJobLower = new GridBagLayout();
-		gbl_panelJobLower.columnWidths = new int[]{74,74,74,74,74,74};
+		gbl_panelJobLower.columnWidths = new int[]{74,74,74,74,74};
 		gbl_panelJobLower.rowHeights = new int[]{74,74,74,74,74,74};
 		gbl_panelJobLower.columnWeights = new double[]{1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0};
 		gbl_panelJobLower.rowWeights = new double[]{1.0, 1.0, 1.0, 1.0, 1.0, 1.0};
 		panelJobLower.setLayout(gbl_panelJobLower);
 		
-		JPanel divider = new JPanel();
-		divider.setBackground(Color.DARK_GRAY);
-		panelSkills.add(divider, new GBC(0,1).setInsets(5).setFill(GBC.BOTH));
+		JLabel dividerUpperJob = new JLabel();
+		dividerUpperJob.setOpaque(true);
+		dividerUpperJob.setBackground(Color.DARK_GRAY);
+		dividerUpperJob.setForeground(Color.WHITE);
+		dividerUpperJob.setHorizontalAlignment(SwingConstants.CENTER);
+		dividerUpperJob.setFont(new Font(Font.SANS_SERIF, Font.BOLD, 24));
+		dividerUpperJob.setText("Upper Job");
+		dividerUpperJob.setMinimumSize(new Dimension(450,100));
+		dividerUpperJob.setBorder(BorderFactory.createCompoundBorder(BorderFactory.createBevelBorder(BevelBorder.RAISED,Color.GRAY, Color.DARK_GRAY),BorderFactory.createBevelBorder(BevelBorder.LOWERED,Color.GRAY, Color.DARK_GRAY)));
+		panelSkills.add(dividerUpperJob, new GBC(0,2).setInsets(5).setFill(GBC.BOTH));
 		
 		panelJobUpper = new JPanel();
 		panelJobUpper.setOpaque(false);
-		panelSkills.add(panelJobUpper, new GBC(0,2).setInsets(5).setFill(GBC.BOTH));
+		panelJobLower.setPreferredSize(new Dimension(74*4, 74*6));
+		panelSkills.add(panelJobUpper, new GBC(0,3).setInsets(5).setFill(GBC.BOTH));
 		GridBagLayout gbl_panelJobUpper = new GridBagLayout();
 		gbl_panelJobUpper.columnWidths = new int[]{74,74,74,74,74,74};
 		gbl_panelJobUpper.rowHeights = new int[]{74,74,74,74};
@@ -229,7 +249,7 @@ public class Calculator extends JApplet {
 							parentPanel.add(panelBackground,new GBC(req.JPANEL.constraints.gridx, yLow + 1).setInsets(5).setFill(GBC.BOTH).setGridHeight(diff - 1));
 						}
 						
-						/* MULTIPLE ARROWS -- REPLACED WITH SINGLE ARROW CODE ABOVE
+						/* MULTIPLE arrowtransS -- REPLACED WITH SINGLE arrowtrans CODE ABOVE
 						int yLow = req.JPANEL.constraints.gridy;
 						int yHigh = skill.JPANEL.constraints.gridy;
 						for (int i = yLow + 1;i < yHigh;i++) {
@@ -254,7 +274,7 @@ public class Calculator extends JApplet {
 	protected JPanel getPanelJobLower() {
 		return panelJobLower;
 	}
-	protected JComboBox getCmbJobUpper() {
+	protected JComboBox<JobUpper> getCmbJobUpper() {
 		return cmbJobUpper;
 	}
 	protected JPanel getPanelJobUpper() {
